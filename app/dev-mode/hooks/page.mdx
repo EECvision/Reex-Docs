@@ -1,0 +1,56 @@
+﻿# Authentication & Custom Hooks
+
+Reex API Builder generates a set of utility hooks to make managing user sessions and custom API requests straightforward. Unless you are using the `next-auth` strategy which handles authentication internally via its own session management, it is highly recommended to use these hooks for all custom authentication flows.
+
+The hooks are available from `api-services/hooks`.
+
+### Available Hooks
+
+- **`useAuthSession`**: Hook to check the current authentication state (`status`, `isAuthenticated`, `isLoading`), manage sessions, and clear sessions via `clearSession()`.
+  
+  ```tsx
+  import { useAuthSession } from "@/api-services/hooks/useAuthSession";
+
+  const { isAuthenticated, setSession, clearSession } = useAuthSession(); 
+  ```
+
+
+- **`useHeaders`**: Provides `setCustomHeaders` and `removeCustomHeader` for setting custom request headers (e.g. tenant IDs or API keys your backend requires).
+- **`useNotification`**: Utility hook to consume the centralized notification state.
+
+### Usage
+
+```typescript filename="app/page.tsx"
+
+  const { setTokens } = useTokens();
+  const { setCustomHeaders } = useHeaders();
+  const { isAuthenticated, clearSession } = useAuthState();
+
+  const { data } = useGetTodosQuery({ enabled: isAuthenticated });
+
+  return (
+
+          login({ username: "user", password: "user123" }, {
+            onSuccess: (res) => {
+              // Extract and save tokens securely
+              const { accessToken, refreshToken } = res.data;
+              setTokens({ accessToken, refreshToken });
+              
+              // Optional: Set custom headers your backend requires after login
+              setCustomHeaders({
+                "x-tenant-id": "tenant-abc",
+              });
+            },
+          })
+        }
+      >
+        Login
+
+      Logout
+
+  );
+}
+```
+
+> **Note:** If your backend does not require custom headers, you can omit the `setCustomHeaders` call entirely — token storage and header injection are handled automatically as soon as `setTokens` is called.
+

@@ -1,0 +1,48 @@
+﻿# Working with Multiple Collections
+
+Preview Mode supports working with multiple collections simultaneously — perfect for microservices architectures or comparing different API versions.
+
+### Managing Multiple Collections
+
+**Importing Multiple Collections:**
+
+1. Import your first collection (e.g., "User Service").
+2. Click **Import** again.
+3. Import your second collection (e.g., "Payment Service").
+4. Both collections appear as separate folders in the sidebar.
+
+Each collection maintains its own base URL and authentication settings. Click any collection to expand and browse its endpoints.
+
+**Example Sidebar Structure:**
+
+```text
+📁 User Service API v1
+  ├── GET /users
+  ├── POST /users
+  └── GET /users/{id}
+
+📁 Payment Service API v2
+  ├── GET /payments
+  ├── POST /payments
+  └── GET /invoices
+
+📁 Notification Service
+  ├── POST /notify
+  └── GET /templates
+```
+
+---
+
+### Preview Mode vs. Dev Mode
+
+|                             | Preview Mode | Dev Mode |
+| --------------------------- | ------------ | -------- |
+| Exploring a new API         | ✅           |          |
+| Debugging in isolation      | ✅           |          |
+| Verifying API documentation | ✅           |          |
+| Working with multiple APIs  | ✅           |          |
+| Generated hooks and types   |              | ✅       |
+| Codebase sync               |              | ✅       |
+| Version control             |              | ✅       |
+| CI/CD integration           |              | ✅       |
+

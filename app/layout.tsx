@@ -29,7 +29,7 @@ const navbar = (
     }
   >
     <a
-      href="https://reex-api-builder.toolshq.app/"
+      href="https://studio.reex-api.dev/"
       target="_blank"
       rel="noopener noreferrer"
       className="get-started-button"

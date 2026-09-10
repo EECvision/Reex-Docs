@@ -25,29 +25,29 @@ Reex API Builder eliminates this boilerplate.
 * **Zero-Boilerplate Generation:** Instantly transform API collections into tested REST API code, React Query hooks, and TypeScript interfaces.
 * **Intelligent Two-Way Sync:** Your code and the tool's UI are always aligned. Edit in your IDE or tweak in the tool—changes reflect perfectly on both sides.
 * **Smart API Diffing:** Never get caught off guard by a backend update. Re-import a collection and instantly see exactly what endpoints, payloads, or types were added or removed before you integrate.
-* **Drop-in Authentication:** Seamlessly manage user sessions with pre-built hooks for LocalStorage, Cookies, or Next-Auth for React and Next.js developers.
+* **Drop-in Authentication:** Seamlessly manage user sessions with pre-built hooks for JWT (Tokens), Cookies, or Next-Auth for React and Next.js developers.
 
-### Core Modules
+### Core Modes
 
-Reex API Builder is composed of three powerful modules to suit different stages of development:
+Reex API Builder operates in three distinct modes to suit different stages of development:
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-  <Link href="/project-module" className="flex flex-col justify-between p-6 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-xl hover:shadow-lg transition-all hover:border-blue-500/50 group">
+  <Link href="/dev-mode" className="flex flex-col justify-between p-6 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-xl hover:shadow-lg transition-all hover:border-blue-500/50 group">
     <div>
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-blue-50 dark:bg-blue-500/10 rounded-lg text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
           <Box className="w-5 h-5" />
         </div>
-        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">Project Module</h3>
+        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">Dev Mode</h3>
       </div>
       <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-        Directly integrate API collections into your React application.
+        Directly integrate API collections into your React application alongside your local codebase.
       </p>
     </div>
   </Link>
 
 <Link
-  href="/standalone-module"
+  href="/preview-mode"
   className="flex flex-col justify-between p-6 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-xl hover:shadow-lg transition-all hover:border-blue-500/50 group"
 >
   <div>
@@ -56,25 +56,25 @@ Reex API Builder is composed of three powerful modules to suit different stages 
         <Terminal className="w-5 h-5" />
       </div>
       <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">
-        Standalone Module
+        Preview Mode
       </h3>
     </div>
     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-      Import and manage collections independently.
+      Import and explore collections as a standard API client — no local project required.
     </p>
   </div>
 </Link>
 
-  <Link href="/test-module" className="flex flex-col justify-between p-6 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-xl hover:shadow-lg transition-all hover:border-blue-500/50 group">
+  <Link href="/api-sandbox" className="flex flex-col justify-between p-6 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-xl hover:shadow-lg transition-all hover:border-blue-500/50 group">
     <div>
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-purple-50 dark:bg-purple-500/10 rounded-lg text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
           <Code className="w-5 h-5" />
         </div>
-        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">Test Module</h3>
+        <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">API Sandbox</h3>
       </div>
       <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-        Rapidly test local and remote API endpoints.
+        Rapidly build and test API requests from scratch.
       </p>
     </div>
   </Link>

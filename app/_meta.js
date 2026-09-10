@@ -1,6 +1,6 @@
 export default {
   index: "Introduction",
-  "project-module": "Project Module",
-  "standalone-module": "Standalone Module",
-  "test-module": "Test Module",
+  "dev-mode": "Dev Mode",
+  "preview-mode": "Preview Mode",
+  "api-sandbox": "API Sandbox",
 };

@@ -18,7 +18,7 @@ Reex API Builder relies on a global CLI package to bridge the connection between
 Open your terminal and install it globally:
 
 ```bash
-npm install -g reex-api-builder
+npm install -g reex-cli
 ```
 
 ### Step 2: Initialize Your Project
@@ -26,7 +26,7 @@ npm install -g reex-api-builder
 Navigate to the root directory of your React project and run:
 
 ```bash
-reex-build
+reex start
 ```
 
 Running this command triggers a health check. Reex API Builder detects any missing dependencies and installs them automatically:
@@ -39,7 +39,7 @@ Running this command triggers a health check. Reex API Builder detects any missi
 It also generates an `api-services` directory in your project root, containing your API hooks, models, authentication guards, and providers.
 
 The application then launches and automatically opens your browser to:  
-**[https://reex-api-builder.toolshq.app/?localPort=4000](https://reex-api-builder.toolshq.app/?localPort=4000)**
+**[https://studio.reex-api.dev/?localPort=4000](https://studio.reex-api.dev/?localPort=4000)**
 
 On first launch, you will be prompted to grant **Local Network** permissions to enable communication between Reex API Builder and your local project files.
 
@@ -48,7 +48,7 @@ On first launch, you will be prompted to grant **Local Network** permissions to 
 > **Note:** To run multiple projects simultaneously, switch ports using the `-p` flag:
 >
 > ```bash
-> reex-build -p 4002
+> reex start -p 4002
 > ```
 
 ### Step 3: Import a Collection & Configure Authentication
@@ -63,11 +63,11 @@ After importing, the `api-services` directory will be updated with the following
 
 ### Step 4: Configure the Providers
 
-Reex API Builder generates dedicated provider components to manage query client context and authentication. Wrap your application with these providers to enable the generated hooks, manage API state, and handle user sessions.
+Reex API Builder generates a centralized provider component to manage query client context, notifications, and authentication. Wrap your application with this provider to enable the generated hooks, manage API state, and handle user sessions.
 
 1. Open your project's root file (e.g., `layout.tsx` for Next.js App Router, or `root.tsx`, `main.tsx` for standard React).
-2. Import `QueryProvider` and your chosen `AuthProvider` from the `api-services` directory.
-3. Wrap your root layout or component with both providers.
+2. Import `ReexProvider` from the `api-services/providers/ReexProvider` directory.
+3. Wrap your root layout or component with the provider.
 
 Here is a sample configuration for a Next.js app:
 
@@ -75,8 +75,7 @@ Here is a sample configuration for a Next.js app:
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { QueryProvider } from "@/api-services/providers/QueryProvider";
-import { AuthProvider } from "@/api-services/auth/AuthProvider";
+import { ReexProvider } from "@/api-services/providers/ReexProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,21 +100,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <QueryProvider>
-          <AuthProvider strategy="localstorage">{children}</AuthProvider>
-        </QueryProvider>
+        <ReexProvider strategy="jwt">
+          {children}
+        </ReexProvider>
       </body>
     </html>
   );
 }
 ```
 
-- **QueryProvider**: Enables TanStack queries.
-- **AuthProvider**: Manages user sessions and authentication. Supports three strategies: `localstorage`, `cookie`, and `next-auth`. Defaults to `localstorage`.
+- **ReexProvider**: Enables TanStack queries, manages notifications, and handles user authentication. Supports three strategies: `jwt`, `cookie`, and `next-auth`. Defaults to `jwt`.
 
-For a deeper look at the auth provider, see the [architecture](../architecture) section.
+For a deeper look at the auth provider and ReexProvider, see the [architecture](../architecture) section.
 
-> **Important:** After importing your collection, update the `auth.ts` file in `api-services/user-config` with your backend-specific details.
+> **Important:** After importing your collection, update the `api.config.ts` file in the `api-services` directory with your backend-specific details.
 
 ### Step 5: Test Your Endpoints
 
