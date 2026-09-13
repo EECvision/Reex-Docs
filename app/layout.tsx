@@ -22,7 +22,7 @@ const navbar = (
   <Navbar
     logo={
       <img
-        src="/docs/logo.svg"
+        src="/logo.svg"
         alt="Reex API Builder"
         style={{ height: "32px" }}
       />

@@ -8,6 +8,5 @@ const withNextra = nextra({
 export default withNextra({
     // Next.js config
     reactStrictMode: true,
-    basePath: '/docs',
     transpilePackages: ['nextra', 'nextra-theme-docs'],
 })
