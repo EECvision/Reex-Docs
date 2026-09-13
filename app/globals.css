@@ -3,6 +3,9 @@
    ============================================ */
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 /* ============================================
    CSS Variables
    ============================================ */
@@ -27,6 +30,23 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Logo Mode Toggling
+   ============================================ */
+.logo-dark {
+  display: none !important;
+}
+
+.dark .logo-light,
+[class*="dark"] .logo-light {
+  display: none !important;
+}
+
+.dark .logo-dark,
+[class*="dark"] .logo-dark {
+  display: block !important;
 }
 
 /* ============================================

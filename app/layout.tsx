@@ -49,13 +49,24 @@ const footer = (
 const navbar = (
   <Navbar
     logo={
-      <img
-        src="/logo.svg"
-        alt="Reex API Builder"
-        width={1703}
-        height={528}
-        style={{ height: "32px", width: "auto" }}
-      />
+      <>
+        <img
+          src="/logo.svg"
+          alt="Reex API Builder"
+          width={1703}
+          height={528}
+          className="logo-light"
+          style={{ height: "32px", width: "auto" }}
+        />
+        <img
+          src="/logo-dark.svg"
+          alt="Reex API Builder"
+          width={1703}
+          height={528}
+          className="logo-dark"
+          style={{ height: "32px", width: "auto" }}
+        />
+      </>
     }
   >
     <a
