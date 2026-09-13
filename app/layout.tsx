@@ -1,12 +1,40 @@
 import { Layout, Navbar, Footer } from "nextra-theme-docs";
 import { getPageMap } from "nextra/page-map";
 import { Head } from "nextra/components";
+import type { Metadata } from "next";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_IMAGE,
+  TITLE_TEMPLATE,
+} from "@/lib/seo";
 import "nextra-theme-docs/style.css";
 import "./globals.css";
 
-export const metadata = {
-  title: "Reex API Builder Documentation",
-  description: "Documentation for Reex API Builder",
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: TITLE_TEMPLATE,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: "Reex API Builder",
+  icons: {
+    icon: { url: "/favicon.png", type: "image/png", sizes: "96x96" },
+    apple: { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [SOCIAL_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport = {
@@ -24,7 +52,9 @@ const navbar = (
       <img
         src="/logo.svg"
         alt="Reex API Builder"
-        style={{ height: "32px" }}
+        width={1703}
+        height={528}
+        style={{ height: "32px", width: "auto" }}
       />
     }
   >
@@ -41,7 +71,7 @@ const navbar = (
 
 import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "optional" });
 
 export default async function RootLayout({
   children,

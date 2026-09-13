@@ -1,17 +1,34 @@
-﻿# The Workflow
+---
+title: "Preview Mode: Import and Test APIs"
+description: "Import Swagger, OpenAPI, or Postman collections in Preview Mode, configure API requests, inspect responses, and explore generated TypeScript interfaces."
+alternates:
+  canonical: /preview-mode/workflow
+openGraph:
+  url: /preview-mode/workflow
+  type: website
+  siteName: Reex API Builder Documentation
+  locale: en_US
+  images:
+    - url: /og-image.png
+      width: 1200
+      height: 630
+      alt: 'Reex API Builder logo'
+---
+
+# The Preview Mode Workflow
 
 Preview Mode follows a simple three-step workflow.
 
-### Step 1: Import a Collection
+## Step 1: Import a Collection
 
 Click the **Import** button in the toolbar to bring in your API collection.
 
-#### Supported Formats
+### Supported Formats
 
 - **Swagger/OpenAPI**: JSON or YAML format.
 - **Postman Collection**: JSON export from Postman.
 
-#### Import Methods
+### Import Methods
 
 **From File:**
 
@@ -29,15 +46,15 @@ Click the **Import** button in the toolbar to bring in your API collection.
 
 ---
 
-### Step 2: Send a Request
+## Step 2: Send a Request
 
-#### Selecting an Endpoint
+### Selecting an Endpoint
 
 1. Expand the collection in the left sidebar.
 2. Click any endpoint (e.g., `GET /users`, `POST /login`).
 3. The request panel opens on the right.
 
-#### Configuring the Request
+### Configuring the Request
 
 When you select an endpoint, the request is automatically pre-configured with all parameters, headers, and body schema from the collection spec.
 
@@ -70,17 +87,17 @@ Headers:
 
 **Authentication**: Click the **Auth** tab, select **Bearer Token**, and enter your token. _(Bearer Token is currently the only supported auth type.)_
 
-#### Sending the Request
+### Sending the Request
 
 Click **Send**. Reex API Builder makes the request and displays the response in real-time.
 
 ---
 
-### Step 3: View Response and Interface
+## Step 3: View Response and Interface
 
 After sending a request, two panels are displayed.
 
-#### Response Panel
+### Response Panel
 
 Shows the response body along with status and timing information:
 
@@ -100,7 +117,7 @@ Time:   234ms
 Size:   156 bytes
 ```
 
-#### Interface Panel
+### Interface Panel
 
 Reex API Builder automatically generates a TypeScript interface from the response:
 

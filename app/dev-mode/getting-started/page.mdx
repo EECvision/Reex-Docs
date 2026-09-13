@@ -1,8 +1,25 @@
-# Getting Started
+---
+title: "Dev Mode Setup for React and Next.js"
+description: "Install the Reex CLI, connect your React or Next.js project, import an API collection, and configure authentication and providers to start building."
+alternates:
+  canonical: /dev-mode/getting-started
+openGraph:
+  url: /dev-mode/getting-started
+  type: website
+  siteName: Reex API Builder Documentation
+  locale: en_US
+  images:
+    - url: /og-image.png
+      width: 1200
+      height: 630
+      alt: 'Reex API Builder logo'
+---
+
+# Getting Started with Dev Mode
 
 Getting up and running with Reex API Builder is designed to be frictionless. The tool handles dependency installation and infrastructure setup in your React application automatically.
 
-### Prerequisites
+## Prerequisites
 
 Before installing, ensure your environment meets the following requirements:
 
@@ -11,7 +28,7 @@ Before installing, ensure your environment meets the following requirements:
 - **TypeScript**: Your project must be a TypeScript application.
 - **Package Manager**: `npm`, `yarn`, or `pnpm`.
 
-### Step 1: Install the CLI
+## Step 1: Install the CLI
 
 Reex API Builder relies on a global CLI package to bridge the connection between the Reex API Builder UI and your local project files.
 
@@ -21,7 +38,7 @@ Open your terminal and install it globally:
 npm install -g reex-cli
 ```
 
-### Step 2: Initialize Your Project
+## Step 2: Initialize Your Project
 
 Navigate to the root directory of your React project and run:
 
@@ -51,7 +68,7 @@ On first launch, you will be prompted to grant **Local Network** permissions to 
 > reex start -p 4002
 > ```
 
-### Step 3: Import a Collection & Configure Authentication
+## Step 3: Import a Collection & Configure Authentication
 
 Navigate to the Reex API Builder UI and import the API collection you want to integrate.
 
@@ -61,7 +78,7 @@ After importing, the `api-services` directory will be updated with the following
 - **`generated/`**: React Query hooks for all REST endpoints defined in the collection.
 - **`types/`**: TypeScript type definitions for all endpoint responses. Types default to `unknown` until explicitly updated by calling the endpoint and saving the interface in the Reex API Builder UI. Manual edits are possible but not recommended — if you do, strictly follow the existing naming convention, as deviating from it will break your code.
 
-### Step 4: Configure the Providers
+## Step 4: Configure the Providers
 
 Reex API Builder generates a centralized provider component to manage query client context, notifications, and authentication. Wrap your application with this provider to enable the generated hooks, manage API state, and handle user sessions.
 
@@ -115,10 +132,10 @@ For a deeper look at the auth provider and ReexProvider, see the [architecture](
 
 > **Important:** After importing your collection, update the `api.config.ts` file in the `api-services` directory with your backend-specific details.
 
-### Step 5: Test Your Endpoints
+## Step 5: Test Your Endpoints
 
 Open the Reex API Builder UI and test your endpoints. For every successful request, a response and a corresponding interface are generated. Click **Save Interface** to persist the interface to your project's `types` folder.
 
-### Step 6: Start Consuming Your APIs
+## Step 6: Start Consuming Your APIs
 
 Your setup is complete. You can now start using the generated hooks and services in your project.

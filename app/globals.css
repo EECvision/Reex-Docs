@@ -25,7 +25,6 @@
    Base Styles
    ============================================ */
 body {
-  font-family: "Inter", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -68,6 +67,16 @@ nav {
    ============================================ */
 pre {
   border-radius: 12px !important;
+}
+
+.doc-code-block:not(:first-child) {
+  margin-top: 1.25em;
+}
+
+@media print {
+  .doc-code-block {
+    content-visibility: visible !important;
+  }
 }
 
 /* ============================================
@@ -118,7 +127,6 @@ pre {
    Footer Navigation Links (Previous/Next)
    ============================================ */
 div.nextra-border a {
-  font-family: "Inter", sans-serif !important;
   font-weight: 600 !important;
   font-size: 16px !important;
 }

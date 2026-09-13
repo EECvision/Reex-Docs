@@ -1,8 +1,25 @@
-﻿# The Workflow
+---
+title: "API Sandbox Request Workflow"
+description: "Create collections and API requests in API Sandbox, configure URLs, headers, and request bodies, then inspect responses and generated interfaces."
+alternates:
+  canonical: /api-sandbox/workflow
+openGraph:
+  url: /api-sandbox/workflow
+  type: website
+  siteName: Reex API Builder Documentation
+  locale: en_US
+  images:
+    - url: /og-image.png
+      width: 1200
+      height: 630
+      alt: 'Reex API Builder logo'
+---
+
+# The API Sandbox Workflow
 
 API Sandbox follows a simple create-and-test workflow.
 
-### Step 1: Create a Collection
+## Step 1: Create a Collection
 
 Collections help you organize related requests together.
 
@@ -14,7 +31,7 @@ Collections help you organize related requests together.
 
 ---
 
-### Step 2: Create a Request
+## Step 2: Create a Request
 
 1. Select a collection from the sidebar.
 2. Click **+ New Request**.
@@ -23,7 +40,7 @@ Collections help you organize related requests together.
 
 ---
 
-### Step 3: Configure the Request
+## Step 3: Configure the Request
 
 **HTTP Method**: Choose from the dropdown — `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, `OPTIONS`.
 
@@ -67,17 +84,17 @@ Authorization   | Bearer eyJhbGc...
 
 ---
 
-### Step 4: Send the Request
+## Step 4: Send the Request
 
 Click **Send**. Reex API Builder executes the request and displays the response in real-time.
 
 ---
 
-### Step 5: View Response and Interface
+## Step 5: View Response and Interface
 
 After sending, two panels are displayed.
 
-#### Response Panel
+### Response Panel
 
 Shows the response body along with status and timing information:
 
@@ -103,7 +120,7 @@ Time:   234ms
 Size:   487 bytes
 ```
 
-#### Interface Panel
+### Interface Panel
 
 Reex API Builder automatically generates a TypeScript interface from the response:
 

@@ -1,8 +1,25 @@
+---
+title: "Dev Mode Workflow and Two-Way Sync"
+description: "Learn how Dev Mode syncs API definitions between Reex API Builder and your local codebase, manages configuration, and helps you review API changes."
+alternates:
+  canonical: /dev-mode/workflow
+openGraph:
+  url: /dev-mode/workflow
+  type: website
+  siteName: Reex API Builder Documentation
+  locale: en_US
+  images:
+    - url: /og-image.png
+      width: 1200
+      height: 630
+      alt: 'Reex API Builder logo'
+---
+
 # The Dev Mode Workflow
 
 Dev Mode connects the Reex API Builder UI directly to your local codebase, creating a live link between your API specifications and your frontend logic.
 
-### Two-Way Sync
+## Two-Way Sync
 
 Reex API Builder maintains a live link between the UI and your code.
 
@@ -29,7 +46,7 @@ post_sendMessage: ({
 }): Promise => apiClient.post(`/channels/${channelId}/messages`, payload);
 ```
 
-### Handling Updates (Diff View)
+## Handling Updates (Diff View)
 
 APIs change. When you re-import a collection, Reex API Builder protects your existing code from silent overwrites.
 

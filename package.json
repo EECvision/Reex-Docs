@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "check:seo": "node scripts/check-seo.mjs",
     "start": "next start"
   },
   "dependencies": {

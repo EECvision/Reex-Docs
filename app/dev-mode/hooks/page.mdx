@@ -1,10 +1,27 @@
-﻿# Authentication & Custom Hooks
+---
+title: "Authentication and Custom React Hooks"
+description: "Use Reex API Builder's React hooks to manage authentication sessions, clear session state, and send custom API requests in your React application."
+alternates:
+  canonical: /dev-mode/hooks
+openGraph:
+  url: /dev-mode/hooks
+  type: website
+  siteName: Reex API Builder Documentation
+  locale: en_US
+  images:
+    - url: /og-image.png
+      width: 1200
+      height: 630
+      alt: 'Reex API Builder logo'
+---
+
+# Authentication & Custom Hooks
 
 Reex API Builder generates a set of utility hooks to make managing user sessions and custom API requests straightforward. Unless you are using the `next-auth` strategy which handles authentication internally via its own session management, it is highly recommended to use these hooks for all custom authentication flows.
 
 The hooks are available from `api-services/hooks`.
 
-### Available Hooks
+## Available Hooks
 
 - **`useAuthSession`**: Hook to check the current authentication state (`status`, `isAuthenticated`, `isLoading`), manage sessions, and clear sessions via `clearSession()`.
   
@@ -18,7 +35,7 @@ The hooks are available from `api-services/hooks`.
 - **`useHeaders`**: Provides `setCustomHeaders` and `removeCustomHeader` for setting custom request headers (e.g. tenant IDs or API keys your backend requires).
 - **`useNotification`**: Utility hook to consume the centralized notification state.
 
-### Usage
+## Usage
 
 ```typescript filename="app/page.tsx"
 
