@@ -36,7 +36,16 @@ function DocCodeBlock(props: ComponentProps<typeof DocsPre>) {
 const SeoWrapper: MDXWrapper = props => (
     <>
         <DocStructuredData metadata={props.metadata} />
-        <DocsWrapper {...props} />
+        <DocsWrapper
+            {...props}
+            metadata={{
+                ...props.metadata,
+                // Preserve Nextra feedback links when changing the SEO title.
+                title: 'displayTitle' in props.metadata && typeof props.metadata.displayTitle === 'string'
+                    ? props.metadata.displayTitle
+                    : props.metadata.title,
+            }}
+        />
     </>
 )
 

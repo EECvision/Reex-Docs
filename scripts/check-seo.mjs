@@ -5,7 +5,9 @@ import net from "node:net";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
-const siteUrl = "https://docs.reex-api.dev";
+const brand = JSON.parse(await readFile(new URL("../seo/brand.json", import.meta.url), "utf8"));
+const siteUrl = brand.origins.docs;
+const expectIndexing = !process.argv.includes("--noindex");
 const manifest = JSON.parse(
   await readFile(new URL("../.next/server/app-paths-manifest.json", import.meta.url), "utf8"),
 );
@@ -48,7 +50,8 @@ function inspect(html) {
   };
 }
 
-const remoteUrl = process.argv[2] ? new URL(process.argv[2]) : null;
+const remoteArgument = process.argv.slice(2).find(value => !value.startsWith("--"));
+const remoteUrl = remoteArgument ? new URL(remoteArgument) : null;
 if (remoteUrl) {
   assert.match(remoteUrl.protocol, /^https?:$/, "Use an HTTP or HTTPS URL.");
   assert.equal(remoteUrl.pathname, "/", "Use the documentation site's root URL.");
@@ -105,13 +108,13 @@ try {
     const canonical = new URL(path, siteUrl).href;
     const response = await request(path);
     assert.equal(response.status, 200, `${path}: page must be accessible`);
-    assert.ok(!/noindex/i.test(response.headers.get("x-robots-tag") || ""), `${path}: indexing header`);
+    if (expectIndexing) assert.ok(!/noindex/i.test(response.headers.get("x-robots-tag") || ""), `${path}: indexing header`);
     const html = await response.text();
     const page = inspect(html);
 
     assert.equal(page.titles.length, 1, `${path}: one title`);
     const [title] = page.titles;
-    assert.ok(title.endsWith(" | Reex API Builder"), `${path}: branded title`);
+    assert.ok(path === "/" ? title === "Reex API Docs | React API Integration Framework" : title.endsWith(" | " + brand.sites.docs.name), `${path}: branded title`);
     assert.ok(!titles.has(title), `${path}: unique title`);
     titles.add(title);
 
@@ -124,7 +127,7 @@ try {
     assert.deepEqual(page.links("canonical").map(url => new URL(url).href), [canonical], `${path}: canonical URL`);
     assert.deepEqual(page.links("icon"), ["/favicon.png"], `${path}: square PNG favicon`);
     assert.deepEqual(page.links("apple-touch-icon"), ["/apple-touch-icon.png"], `${path}: Apple touch icon`);
-    assert.ok(!page.meta("robots").some(value => /noindex/i.test(value)), `${path}: indexing allowed`);
+    assert.equal(page.meta("robots").some(value => /noindex/i.test(value)), !expectIndexing, `${path}: indexing allowed`);
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${path}: one main heading`);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
     assert.ok(main, `${path}: server-rendered main content`);
@@ -140,7 +143,7 @@ try {
       "og:title": title,
       "og:description": description[0],
       "og:url": canonical,
-      "og:site_name": "Reex API Builder Documentation",
+      "og:site_name": brand.sites.docs.name,
       "og:type": "website",
       "og:image": `${siteUrl}/og-image.png`,
       "og:image:width": "1200",
@@ -159,11 +162,14 @@ try {
     assert.ok(document, `${path}: document structured data`);
     assert.equal(document.url, canonical);
     assert.equal(document.description, description[0]);
+    assert.equal(document.about?.["@id"], brand.entities.product);
     assert.equal(document.image, `${siteUrl}/og-image.png`);
     if (path === "/") {
       const website = page.graph.find(node => node["@type"] === "WebSite");
       assert.equal(website?.url, canonical);
-      assert.equal(website?.name, "Reex API Builder Documentation");
+      assert.equal(website?.name, brand.sites.docs.name);
+      assert.deepEqual(website.alternateName, brand.sites.docs.alternateNames);
+      assert.equal(website.about?.["@id"], brand.entities.product);
     } else {
       const breadcrumbs = page.graph.find(node => node["@type"] === "BreadcrumbList");
       assert.ok(breadcrumbs, `${path}: breadcrumb structured data`);
@@ -189,7 +195,7 @@ try {
   assert.match(sitemap.headers.get("content-type"), /xml/);
   const xml = await sitemap.text();
   const locations = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => decode(match[1]));
-  assert.deepEqual(locations.sort(), paths.map(path => new URL(path, siteUrl).href).sort(), "Sitemap covers every page exactly once");
+  assert.deepEqual(locations.sort(), expectIndexing ? paths.map(path => new URL(path, siteUrl).href).sort() : [], "Sitemap covers every page exactly once");
   for (const [, lastModified] of xml.matchAll(/<lastmod>(.*?)<\/lastmod>/g)) {
     const timestamp = Date.parse(lastModified);
     assert.ok(Number.isFinite(timestamp) && timestamp <= Date.now(), "Sitemap uses valid modification dates");
@@ -200,7 +206,7 @@ try {
   const rules = await robots.text();
   assert.match(rules, /^User-Agent: \*$/im);
   assert.match(rules, /^Allow: \/$/m);
-  assert.ok(rules.includes(`Sitemap: ${siteUrl}/sitemap.xml`));
+  assert.equal(rules.includes(`Sitemap: ${siteUrl}/sitemap.xml`), expectIndexing);
   assert.ok(!/^Disallow: \/\s*$/m.test(rules), "Crawler access stays open");
 
   const queriedPage = inspect(await (await request("/dev-mode/getting-started?utm_source=seo-check")).text());

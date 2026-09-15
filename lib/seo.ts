@@ -1,66 +1,23 @@
-export const SITE_URL = "https://docs.reex-api.dev";
-export const SITE_NAME = "Reex API Builder Documentation";
-export const TITLE_TEMPLATE = "%s | Reex API Builder";
-export const SITE_DESCRIPTION =
-  "Learn to test APIs and generate TypeScript API clients, React Query hooks, and authentication flows with Reex API Builder's guides and examples.";
+import brand from "../seo/brand.json";
 
-export const SITE_KEYWORDS = [
-  "Reex API Builder",
-  "API testing",
-  "REST endpoint testing",
-  "React API code generation",
-  "TypeScript API clients",
-  "React Query hooks",
-  "React and Next.js setup",
-  "Authentication and custom React hooks",
-  "API collection testing",
-  "Swagger",
-  "OpenAPI",
-  "Postman collections",
-  "API Sandbox",
-  "two-way synchronization",
-  "API",
-  "Builder",
-  "Integration",
-  "Code Generation",
-  "Reex",
-  "reex commands",
-  "reex cli",
-  "reex start",
-  "reex reset",
-  "reex sync",
-  "reex add",
-  "npx reex-cli",
-  "npm reex-cli",
-  "Reex API",
-  "reex-cli",
-  "React Query generator",
-  "TanStack Query",
-  "OpenAPI code generator",
-  "Postman collection parser",
-  "AST code generator",
-  "Private Network Access API testing",
-  "open source API client",
-  "TypeScript API hooks",
-  "reex",
-  "reex-api-builder",
-  "api-builder",
-  "api",
-  "openapi",
-  "swagger",
-  "typescript",
-  "react-query",
-  "code-generator",
-  "cli",
-  "rest-api",
-  "hooks",
-];
+export { brand };
+export const SITE_URL = brand.origins.docs;
+export const SITE_NAME = brand.sites.docs.name;
+export const TITLE_TEMPLATE = "%s | " + SITE_NAME;
+export const SITE_DESCRIPTION =
+  "Learn " + brand.searchName + ", " + brand.positioning.replace(/^The /, "the ") + ". Follow guides for CLI setup, TypeScript clients, TanStack Query hooks, and authentication.";
+
+// Set these before building: pages, robots.txt and the sitemap are prerendered.
+export const INDEXING_ENABLED =
+  process.env.SEO_NOINDEX !== "true" &&
+  process.env.NODE_ENV === "production" &&
+  (!process.env.VERCEL_ENV || process.env.VERCEL_ENV === "production");
 
 export const SOCIAL_IMAGE = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: "Reex API Builder logo",
+  alt: "Reex API logo",
 };
 
 export function absoluteUrl(path: string) {

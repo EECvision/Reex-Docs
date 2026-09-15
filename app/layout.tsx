@@ -4,7 +4,7 @@ import { Head } from "nextra/components";
 import type { Metadata } from "next";
 import {
   SITE_DESCRIPTION,
-  SITE_KEYWORDS,
+  INDEXING_ENABLED,
   SITE_NAME,
   SITE_URL,
   SOCIAL_IMAGE,
@@ -20,8 +20,13 @@ export const metadata: Metadata = {
     template: TITLE_TEMPLATE,
   },
   description: SITE_DESCRIPTION,
-  keywords: SITE_KEYWORDS,
-  applicationName: "Reex API Builder",
+  applicationName: SITE_NAME,
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined },
+  robots: {
+    index: INDEXING_ENABLED,
+    follow: true,
+    googleBot: { index: INDEXING_ENABLED, follow: true },
+  },
   icons: {
     icon: { url: "/favicon.png", type: "image/png", sizes: "96x96" },
     apple: { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
@@ -43,7 +48,7 @@ export const viewport = {
 };
 
 const footer = (
-  <Footer>MIT {new Date().getFullYear()} © Reex API Builder.</Footer>
+  <Footer>MIT {new Date().getFullYear()} © Reex API.</Footer>
 );
 
 const navbar = (
@@ -52,7 +57,7 @@ const navbar = (
       <>
         <img
           src="/logo.svg"
-          alt="Reex API Builder"
+          alt="Reex API Docs"
           width={1703}
           height={528}
           className="logo-light"
@@ -60,7 +65,7 @@ const navbar = (
         />
         <img
           src="/logo-dark.svg"
-          alt="Reex API Builder"
+          alt="Reex API Docs"
           width={1703}
           height={528}
           className="logo-dark"
@@ -99,7 +104,7 @@ export default async function RootLayout({
           pageMap={await getPageMap()}
           footer={footer}
           editLink="Edit this page on GitHub"
-          docsRepositoryBase="https://github.com/EECvision/Reex-api-client/tree/main/docs"
+          docsRepositoryBase="https://github.com/EECvision/Reex-api-docs/tree/main"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           toc={{ float: true, title: "On This Page" }}
         >

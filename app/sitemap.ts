@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
 import type { PageMapItem } from "nextra";
 import { getPageMap } from "nextra/page-map";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, INDEXING_ENABLED } from "@/lib/seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (!INDEXING_ENABLED) return [];
+
   const pages = new Map<string, MetadataRoute.Sitemap[number]>();
 
   function collect(items: PageMapItem[]) {

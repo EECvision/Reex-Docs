@@ -2,6 +2,7 @@ import type { MDXWrapper } from "nextra";
 import type { ComponentProps } from "react";
 import {
   absoluteUrl,
+  brand,
   serializeJsonLd,
   SITE_DESCRIPTION,
   SITE_NAME,
@@ -32,6 +33,7 @@ export function DocStructuredData({
       description: metadata.description,
       inLanguage: "en",
       isPartOf: { "@id": absoluteUrl("/#website") },
+      about: { "@id": brand.entities.product },
       image: absoluteUrl(SOCIAL_IMAGE.url),
       ...(!isHome && {
         mainEntityOfPage: url,
@@ -45,8 +47,9 @@ export function DocStructuredData({
       "@id": absoluteUrl("/#website"),
       url,
       name: SITE_NAME,
-      alternateName: "Reex API Builder Docs",
+      alternateName: brand.sites.docs.alternateNames,
       description: SITE_DESCRIPTION,
+      about: { "@id": brand.entities.product },
       inLanguage: "en",
     });
   } else {
