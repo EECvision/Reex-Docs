@@ -104,7 +104,7 @@ export default async function RootLayout({
           pageMap={await getPageMap()}
           footer={footer}
           editLink="Edit this page on GitHub"
-          docsRepositoryBase="https://github.com/EECvision/Reex-api-docs/tree/main"
+          docsRepositoryBase="https://github.com/EECvision/reex-docs/tree/main"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           toc={{ float: true, title: "On This Page" }}
         >
